@@ -455,6 +455,39 @@ The skills in this repository remain free, open-source, and stack-agnostic. The 
 
 ---
 
+## Design principles
+
+claude-skills follows the [Agent Skills Specification](https://agentskills.io), the open standard for portable AI agent skills originally developed by Anthropic and adopted across the AI tooling ecosystem (Claude Code, OpenAI Codex, Gemini CLI, GitHub Copilot, Cursor, VS Code, Goose, Spring AI, and 30+ other platforms as of early 2026).
+
+Beyond the format itself, the catalog is designed around three principles aligned with the guidance Anthropic publishes in [Building effective agents](https://www.anthropic.com/engineering/building-effective-agents):
+
+**Simplicity.** Each skill covers one focused capability rather than trying to be a multi-purpose document. A roadmap-planning skill plans roadmaps. A keyword-research skill researches keywords. Composing them together produces complex workflows; mixing them inside one skill produces unreliable ones.
+
+**Transparency.** Every skill declares its scope, dependencies, and expected behavior in machine-readable YAML frontmatter. The catalog is inspectable by tooling, not just by humans reading prose.
+
+**Quality contracts via tooling.** Structural and content quality is enforced through automated checks (run `python .github/scripts/lint_skills.py`) rather than convention alone. Every skill is validated against a schema. Every catalog change is validated in CI.
+
+Skills in this catalog are designed to compose into the common agentic workflow patterns Anthropic documents: prompt chaining (sequential steps), routing (classify and direct), parallelization (sectioning or voting), orchestrator-workers (dynamic delegation), and evaluator-optimizer (iterative refinement).
+
+Because the catalog conforms to the open Agent Skills standard, skills work across any platform supporting the specification without modification.
+
+## Family repos
+
+claude-skills is the parent catalog. Curated subsets and companion repos focus on specific specialties:
+
+| Repo | Focus | Skills |
+|---|---|---|
+| [claude-skills](https://github.com/rampstackco/claude-skills) | Full catalog (you are here) | 99 |
+| [claude-skills-starter](https://github.com/rampstackco/claude-skills-starter) | General-purpose lite | 14 |
+| [claude-skills-seo](https://github.com/rampstackco/claude-skills-seo) | SEO consulting | 12 |
+| [claude-skills-pm](https://github.com/rampstackco/claude-skills-pm) | Product management | 12 |
+| [claude-skills-widgets](https://github.com/rampstackco/claude-skills-widgets) | UI patterns + components | 65 + 32 |
+| [awesome-claude-skills](https://github.com/rampstackco/awesome-claude-skills) | Curated discovery list | n/a |
+
+Each family repo is MIT-licensed, conforms to the Agent Skills Specification, and is stack-agnostic. Use the full catalog for breadth; use a specialty subset when working in one domain.
+
+---
+
 <!-- COUNT_CATALOG_HEADER:START -->
 ## The 99-skill catalog
 <!-- COUNT_CATALOG_HEADER:END -->
