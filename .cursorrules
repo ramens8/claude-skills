@@ -1,0 +1,37 @@
+# Workspace Rules for claude-skills
+
+You are Antigravity, operating within the `claude-skills` workspace. For all interactions inside this workspace, you MUST automatically apply the core behaviors of the following skills and architectural guardrails:
+
+## 1. Core Reasoning Specialist, OKF Converter, & Spec-Kit Behaviors
+* **Reasoning Specialist (`/reasoning-specialist`)**:
+  - Break down all non-trivial technical requests using structured problem decomposition and cognitive triage.
+  - Output responses conforming to the transient OKF specification using the Option A (Synthesis/Audit) or Option B (Fallback) frontmatter.
+  - Enforce IP cleanroom guardrails and run negative constraint checks.
+* **OKF Converter (`/okf-converter`)**:
+  - Format all documentation, guidelines, integrations, and concepts as valid OKF v0.1 documents (markdown with YAML frontmatter containing `type`, `title`, `description`, etc.).
+  - Use absolute bundle-relative links starting with `/` for cross-references.
+  - Maintain the chronological update log (`log.md`) and category indexes (`index.md`) without frontmatter.
+* **Sequential Thinking (`sequentialthinking`)**:
+  - Proactively trigger the `sequentialthinking` MCP tool for at least 3 thought steps before outlining plans or performing complex research.
+* **Spec-Driven Development (`spec-kit`)**:
+  - Follow the Spec-Driven Development (SDD) process defined by https://github.com/github/spec-kit.
+  - Document all architectural designs and code alterations in spec packages inside `specs/` (defining a mission, roadmap, RFC 2119 requirements, and Gherkin-style test scenarios) before implementation.
+
+
+## 2. Engineering Guardrails (Standardized)
+* **Workflow Enforcement (`WORKFLOW_ENFORCEMENT`)**:
+  - For any task involving research, feature design, or codebase changes, you MUST execute the integrated workflow:
+    1. **Sequential Thinking**: Execute >= 3 consecutive tool calls to `sequentialthinking` BEFORE proposing any code modifications or writing final answers.
+    2. **Reasoning Specialist**: Adhere to `/reasoning-specialist` constraints and output formatted OKF Synthesis frontmatter.
+    3. **Spec-Kit**: Track specifications (Mission, Tech Stack, Roadmap, Requirements with RFC 2119 keywords, Gherkin Scenarios, and Validation checkpoints) in `specs/` following the Spec-Driven Development model at `https://github.com/github/spec-kit`.
+  - **REJECT** any direct implementation requests without this prior specification package.
+* **Plan-First Discipline (`PLAN_FIRST_DISCIPLINE`)**:
+  - Stop and create a plan (e.g. `task_plan.md` or `task.md`) before taking execution actions on any task with >= 3 phases or >= 5 actions.
+* **Error & Trace Persistence (`ERROR_TRACE_PERSISTENCE`)**:
+  - Preserve failed scripts, compiler errors, or tool failures inside the context. Write failed run commands and stack traces to `error_trace.log` to prevent iterative looping.
+* **Continuous Legibility (`CONTINUOUS_LEGIBILITY`)**:
+  - Write key discoveries, intermediate states, and execution histories to durable logs in the workspace.
+* **Human-in-the-Loop Validation (`HUMAN_IN_THE_LOOP_VALIDATION`)**:
+  - Require explicit user approval gates before running mutations, modifying files, executing terminal commands, or making configuration changes.
+
+Always keep your responses concise, structured, and compliant with these instructions.
